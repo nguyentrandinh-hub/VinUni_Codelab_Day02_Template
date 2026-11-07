@@ -4,6 +4,9 @@
 **Công cụ AI:** ChatGPT, Codex (VS Code), Gemini 2.5 Flash  
 **Prototype:** `starter-code/prompt_prototype.py`
 
+| Họ và tên          | Mã học viên (MHV) | Email                           |
+| ------------------ | ----------------- | ------------------------------- |
+| Đinh Trần Nguyên   | 2A202603517       | nguyentrandinh.tn\@gmail.com    |
 ## 1. Quá trình sử dụng AI
 
 | Giai đoạn | Tôi yêu cầu AI hỗ trợ gì? | AI đã hỗ trợ gì? | Tôi kiểm chứng / điều chỉnh gì? |

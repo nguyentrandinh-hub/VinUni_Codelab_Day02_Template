@@ -1,3 +1,6 @@
+| Họ và tên          | Mã học viên (MHV) | Email                           |
+| ------------------ | ----------------- | ------------------------------- |
+| Đinh Trần Nguyên   | 2A202603517       | nguyentrandinh.tn\@gmail.com    |
 # 02 — Deep-Dive Report (Cá nhân)
 
 ## Phase 3 — DEEP-DIVE

@@ -1,3 +1,7 @@
+| Họ và tên          | Mã học viên (MHV) | Email                           |
+| ------------------ | ----------------- | ------------------------------- |
+| Đinh Trần Nguyên   | 2A202603517       | nguyentrandinh.tn\@gmail.com    |
+
 # 01 — Problem Scan (Cá nhân)
 
 ## Phase 1 — SCAN
