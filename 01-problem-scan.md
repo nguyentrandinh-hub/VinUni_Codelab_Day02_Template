@@ -24,51 +24,61 @@ Quét qua 4 lenses: Lặp lại, Tốn thời gian, AI có thể tốt hơn, Pai
 
 # 🃏 Phase 2 — QUICK-ASSESS: 3 Quick Problem Cards
 
-Chọn top 3 từ bảng SCAN: **#1 (VinFast chẩn đoán lỗi), #2 (Vinpearl Group Booking), #3 (Vinhomes phản ánh cư dân).**
+Chọn top 3 từ bảng SCAN: **#1 (VinFast kiểm tra và đánh giá sự cố xe), #2 (Vinpearl Group Booking), #3 (Vinhomes phản ánh cư dân).**
 
 Ba bài này khác nhau về kiểu kiến trúc (LLM, LLM kết hợp rule, rule kết hợp LLM) và mức rủi ro, nên dễ so sánh khi nhóm thảo luận.
 
-## Card #1 — VinFast: Phân loại lỗi xe từ mô tả của khách
+## Card #1 — VinFast: Kiểm tra và đánh giá sự cố xe
 
 ```text
 QUICK PROBLEM CARD #1
 
-Bài toán (1 câu): Khách mô tả lỗi xe bằng tiếng Việt đời thường, cần
-tự động phân loại thành hạng mục kỹ thuật sơ bộ để đặt lịch xưởng đúng.
+Bài toán (1 câu): Khi khách mang xe có sự cố đến xưởng, việc kiểm tra
+và đánh giá nguyên nhân ban đầu phụ thuộc nhiều vào kinh nghiệm kỹ
+thuật viên và mất khoảng 20 phút/xe; cần AI hỗ trợ tổng hợp triệu
+chứng, lịch sử xe để gợi ý nguyên nhân khả dĩ.
 
 Công ty thành viên: [x] VinFast  [ ] Xanh SM  [ ] Vinhomes
                     [ ] Vinmec   [ ] Khác
 
 Ai đang đau (Actor)?
-  - Cố vấn dịch vụ (phải hỏi lại nhiều lần, ghi tay)
-  - Khách hàng (chờ lâu, mô tả xong vẫn bị hỏi lại)
-  - Kỹ thuật viên (nhận phiếu mơ hồ, mất thời gian kiểm tra lại)
+  - Nhân viên tiếp nhận (hỏi thông tin, ghi triệu chứng bằng tay)
+  - Kỹ thuật viên (tự tổng hợp triệu chứng, lịch sử, kết quả kiểm tra)
+  - Khách hàng (chờ lâu mới biết nguyên nhân và báo giá)
 
-Workflow thủ công hiện tại (5 bước):
-  1. Khách gọi hotline/nhắn tin mô tả lỗi
-  -> 2. Cố vấn dịch vụ hỏi thêm triệu chứng (vị trí, khi nào, âm thanh)
-  -> 3. Cố vấn ghi phiếu tiếp nhận, chọn hạng mục lỗi theo kinh nghiệm
-  -> 4. Đặt lịch xưởng và chuẩn bị phụ tùng theo phán đoán
-  -> 5. Kỹ thuật viên kiểm tra thực tế, sửa lại phân loại nếu sai
+Workflow thủ công hiện tại (6 bước, ~20 phút/xe):
+  1. Nhân viên tiếp nhận hỏi thông tin khách, tra VIN và lịch sử bảo dưỡng
+  -> 2. Nhân viên tiếp nhận hỏi khách về vấn đề của xe
+  -> (handoff: chuyển thông tin xe/triệu chứng cho kỹ thuật viên)
+  -> 3. Kỹ thuật viên quan sát, kiểm tra trực tiếp và chạy thử
+  -> 4. Kỹ thuật viên đánh giá nguyên nhân từ kết quả kiểm tra và kinh nghiệm
+  -> 5. Kỹ thuật viên thông báo lỗi, phương án sửa và báo giá
+  -> (handoff: trao đổi phương án và báo giá với khách)
+  -> 6. Khách hàng quyết định có đồng ý sửa hay không
 
-Bước nào tốn thời gian/lỗi nhất? Bước 2-3 (ước tính 8-10 phút/lượt,
-và phân loại sai kéo theo chuẩn bị nhầm phụ tùng)
-AI có thể nhảy vào hỗ trợ ở bước nào? Bước 2-3: đọc mô tả, gợi ý
-3 hạng mục lỗi khả dĩ kèm câu hỏi làm rõ cho cố vấn dùng ngay.
+Bước nào tốn thời gian/lỗi nhất? Bước 4: tổng hợp triệu chứng, lịch sử
+liên quan và kết quả kiểm tra để hình thành đánh giá sơ bộ
+(ước tính ~6 phút/20 phút, cần xác minh bằng đo thực tế)
+AI có thể nhảy vào hỗ trợ ở bước nào? Bước 2 (chuẩn hóa triệu chứng
+khách mô tả thành dữ liệu có cấu trúc) và bước 4 (gợi ý nguyên nhân khả
+dĩ từ triệu chứng + lịch sử bảo dưỡng của VIN, kỹ thuật viên quyết định).
 
-Đo thành công bằng gì (Metric có số)?
-  - Giảm thời gian tiếp nhận từ ~10 phút xuống dưới 4 phút/lượt
-  - Tỉ lệ phân loại sơ bộ đúng (kỹ thuật viên xác nhận) từ ~70% lên 85%
+Đo thành công bằng gì (Metric có số)? (ước tính, cần baseline thật)
+  - Giảm thời gian từ lúc nhận xe đến lúc có đánh giá sơ bộ
+    từ ~20 phút xuống dưới 12 phút/xe
+  - Tỉ lệ gợi ý nguyên nhân của AI nằm trong top 3 kết luận cuối của
+    kỹ thuật viên đạt từ 80% trở lên
 
 Quick Architecture: [ ] No AI  [ ] Rule  [x] LLM  [ ] Agent
-  LLM chỉ gợi ý phân loại. Cố vấn dịch vụ luôn là người xác nhận.
+  LLM chỉ gợi ý. Kỹ thuật viên luôn là người kết luận.
+  Rule cứng chạy trước cho nhóm lỗi an toàn.
 ```
 
-**Ranh giới an toàn:** Nếu mô tả có dấu hiệu liên quan phanh, lái, pin cao áp, túi khí hoặc cháy, hệ thống không để AI kết luận mà chuyển ngay cho kỹ sư và nhắc khách dừng xe an toàn. Đây là rule cứng chạy trước LLM.
+**Ranh giới an toàn:** Nếu triệu chứng có dấu hiệu liên quan phanh, lái, pin cao áp, túi khí hoặc cháy, hệ thống không để AI đưa ra gợi ý như bình thường mà báo ngay cho kỹ thuật viên/kỹ sư phụ trách và nhắc khách dừng xe an toàn. Đây là rule cứng chạy trước LLM. AI không báo giá và không quyết định có sửa hay không.
 
 **Stress-test (CFO / Vận hành):**
 - Rule theo từ khóa có đủ không? Với mô tả đời thường rất đa dạng thì khó, nhưng cần chạy thử trên phiếu cũ để so sánh với LLM trước khi chọn.
-- Chỉ số "đúng 85%" cần dữ liệu phiếu tiếp nhận cũ để làm baseline, hiện chưa có.
+- Chỉ số "top 3 đạt 80%" cần dữ liệu phiếu kiểm tra cũ để làm baseline, hiện chưa có. Con số 20 phút/xe cũng cần đo thực tế.
 - Chi phí mỗi lượt gọi LLM cần nhỏ hơn giá trị thời gian cố vấn tiết kiệm được.
 
 ---
@@ -164,9 +174,9 @@ Quick Architecture: [ ] No AI  [x] Rule  [x] LLM  [ ] Agent
 
 ---
 
-## 🗳️ Bài toán đề xuất để Deep-Dive
+## 🗳️ Bài toán được chọn để Deep-Dive
 
-Tôi đề xuất **Card #1 (VinFast chẩn đoán lỗi)** hoặc **Card #3 (Vinhomes)** để nhóm thảo luận:
+Nhóm đã chọn **Card #1 (VinFast kiểm tra và đánh giá sự cố xe)** để Deep-Dive. Lý do so với hai card còn lại:
 
 - **Card #1:** Giá trị rõ, đầu vào là ngôn ngữ tự nhiên nên hợp với LLM. Cần ranh giới an toàn nghiêm ngặt, đây là điểm hay để thể hiện tư duy Operational Boundary.
 - **Card #3:** Dữ liệu dồi dào, rủi ro thấp hơn, dễ đo metric. Phù hợp nếu nhóm muốn bản mẫu chắc chắn.
