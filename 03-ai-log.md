@@ -1,7 +1,5 @@
 # 03 — AI Log và Reflection
 
-> **Ghi chú cho người nộp (xóa trước khi nộp):** Bản này viết theo những việc bạn thực sự đã làm trong phiên làm việc với Claude, gồm cả kết quả chạy Gemini thật. Còn lại vài chỗ **[ĐIỀN]** và **[XÁC NHẬN]**: chỉ điền nếu đúng là bạn đã làm, nếu không thì xóa. Mục này chấm theo tính trung thực.
-
 ---
 
 ## 1. Cách tôi làm việc với AI
