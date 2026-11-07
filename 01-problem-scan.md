@@ -1,6 +1,6 @@
 # 🔍 Phase 1 — SCAN: Tìm kiếm cơ hội (Cá nhân)
 
-Dùng **4 Lenses** quét qua vận hành của các công ty thành viên Vingroup.
+Bài toán của tôi
 
 | # | Subsidiary | Lens | Mô tả ngắn bài toán |
 |---|------------|------|---------------------|
@@ -14,13 +14,13 @@ Dùng **4 Lenses** quét qua vận hành của các công ty thành viên Vingro
 
 # 🃏 Phase 2 — QUICK-ASSESS: 3 Quick Problem Cards (Cá nhân)
 
-Chọn top 3 từ danh sách SCAN: **#3 (Vinhomes CSKH), #1 (Xanh SM Nhu cầu đặt xe), #2 (VinFast Kiểm tra lỗi dây truyền sản xuất).**
+## Thẻ bài toán tiêu biểu: 
 
-## Thẻ bài toán tiêu biểu: Card #3 — Vinhomes Tự động phân loại và điều phối phản ánh cư dân
+Card #3 — Vinhomes Tự động phân loại và điều phối phản ánh cư dân
 
 ```text
 ┌─────────────────────────────────────────────────────────────┐
-│ QUICK PROBLEM CARD #2                                       │
+│ QUICK PROBLEM CARD #3                                       │
 │                                                             │
 │ Bài toán: Tự động phân loại phản ánh của cư dân và chuyển   |
 | yêu cầu đến đúng bộ phận phụ trách nhằm giảm thời gian xử lý|
@@ -61,3 +61,84 @@ Chọn top 3 từ danh sách SCAN: **#3 (Vinhomes CSKH), #1 (Xanh SM Nhu cầu �
 └─────────────────────────────────────────────────────────────┘
 ```
 
+Card #1 — Xanh SM Nhu cầu đặt xe theo khu vực và khung giờ để điều phối tài xế hợp lý
+
+```text
+┌─────────────────────────────────────────────────────────────┐
+│ QUICK PROBLEM CARD #1                                       │
+│                                                             │
+│ Bài toán: Dự báo nhu cầu đặt xe theo khu vực và khung giờ để|
+| hỗ trợ điều phối tài xế, hạn chế tình trạng thiếu xe và tài |
+| xế phải chờ lâu                                             │
+│ Công ty thành viên: [x] Xanh SM                             │
+│                                                             │
+│ Ai đang đau?                                                │
+│ - Tài xế: Phải chờ lâu tại khu vực ít khách.                |
+| - Bộ phận điều phối: Khó dự đoán khu vực có nhu cầu tăng    |
+|   cao.                                                      |
+| - Khách hàng: Phải chờ lâu khi thiếu tài xế.                | 
+|                                                             │
+│ Workflow thủ công hiện tại (5 bước):                        │
+│  1. Thu thập dữ liệu chuyến xe và nhu cầu đặt xe.           |
+|  2. Theo dõi số lượng tài xế đang hoạt động theo khu vực.   |
+|  3. Phân tích thủ công khu vực có nhu cầu cao/thấp.         |
+|  4. Ước lượng nhu cầu đặt xe trong các khung giờ tiếp theo. |
+|  5. Đề xuất tài xế di chuyển đến khu vực có nhu cầu cao.    |
+│                                                             │
+│ Bước nào tốn nhất? Bước 3-4 (⏱ 10-15 phút/lượt)            |
+│ AI có thể nhảy vào hỗ trợ ở bước nào? Bước 3-4              │
+│ Tự động phân tích dữ liệu lịch sử, dự báo nhu cầu đặt xe    |
+| theo khu vực và khung giờ, đề xuất vị trí điều phối tài xế. |
+│                                                             │
+│ Đo thành công bằng gì (Metric có số)?                       │
+| Forecast Accuracy mục tiêu ≥ 85%.                           |
+| Giảm thời gian phân tích và dự báo từ 15 phút xuống dưới    |
+| 2 phút.                                                     |
+| Giảm thời gian tài xế chờ không có khách tối thiểu 10%.     │
+│                                                             │
+│ Quick Architecture: [x] Machine Learning                    │
+└─────────────────────────────────────────────────────────────┘
+```
+
+Card #2 — VinFast Tự động kiểm tra lỗi ngoại quan trên dây chuyền sản xuất
+
+```text
+┌─────────────────────────────────────────────────────────────┐
+│ QUICK PROBLEM CARD #2                                       │
+│                                                             │
+│ Bài toán: Tự động phát hiện lỗi ngoại quan trên xe và linh  |
+| kiện trong dây chuyền sản xuất nhằm nâng cao độ chính xác và|
+| giảm thời gian kiểm tra chất lượng.                         │
+│ Công ty thành viên: [x] VinFast                             │
+│                                                             │
+│ Ai đang đau?                                                │
+│ - Nhân viên QC: Phải kiểm tra ngoại quan nhiều sản phẩm     |
+|   liên tục.                                                 |
+| - Nhân viên sản xuất: Phải kiểm tra và xử lý lại sản phẩm   |
+|   khi phát hiện lỗi.                                        |
+| - Bộ phận quản lý chất lượng: Khó kiểm soát đồng nhất chất  |
+|   lượng kiểm định.                                          |
+|                                                             │
+│ Workflow thủ công hiện tại (5 bước):                        │
+│  1. Xe hoặc linh kiện đi qua công đoạn kiểm tra chất lượng. |
+|  2. Nhân viên QC quan sát và kiểm tra ngoại quan sản phẩm.  |
+|  3. Xác định các lỗi như trầy xước, móp méo, lỗi sơn hoặc   |
+|     sai lệch linh kiện.                                     |
+|  4. Ghi nhận lỗi và phân loại sản phẩm đạt/không đạt.       |
+|  5. Chuyển sản phẩm lỗi đến bộ phận phụ trách để kiểm tra   |
+|     và sửa chữa.                                            |
+│                                                             │
+│ Bước nào tốn nhất? Bước 2-3 (⏱ 3-5 phút/lượt)              |
+│ AI có thể nhảy vào hỗ trợ ở bước nào? Bước 2-3              │
+│ Sử dụng camera và Computer Vision để tự động nhận diện,     |
+| khoanh vùng và phân loại lỗi ngoại quan trên sản phẩm.      │
+│                                                             │
+│ Đo thành công bằng gì (Metric có số)?                       │
+│ Defect Detection Accuracy mục tiêu ≥ 90%.                   |
+| Giảm thời gian kiểm tra từ 5 phút xuống dưới                |
+| 1 phút/sản phẩm                                             |
+| - False Negative Rate mục tiêu dưới 5%.                     │
+│                                                             │
+│ Quick Architecture: [x] Computer Vision                     │
+└─────────────────────────────────────────────────────────────┘
+```
