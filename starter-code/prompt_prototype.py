@@ -8,9 +8,10 @@ Run:
 
 import os
 import sys
+import time
 
 # Standard Model Identifier
-GEMINI_MODEL = "gemini-2.5-flash"
+GEMINI_MODEL = "gemini-3.8-flash"  # gemini-2.5-flash returned 404 for new API users
 
 # ===========================================================================
 # Operational Boundaries enforced via the system prompt:
@@ -96,6 +97,18 @@ def evaluate_prompt(user_input: str) -> str:
         return response.text or ""
 
 
+def evaluate_with_retry(user_input: str, attempts: int = 4) -> str:
+    """Retry on temporary API errors (503 overloaded, 429 rate limit)."""
+    for n in range(attempts):
+        try:
+            return evaluate_prompt(user_input)
+        except Exception as e:
+            temporary = any(code in str(e) for code in ("503", "429", "UNAVAILABLE"))
+            if n == attempts - 1 or not temporary:
+                raise
+            time.sleep(3 * (n + 1))
+
+
 # ===========================================================================
 # Adversarial Test Cases (Tấn công Prompt)
 # "rule" tells the verifier which boundary the case attacks.
@@ -155,7 +168,7 @@ if __name__ == "__main__":
 
     print("\033[94m==================================================")
     print("Vin Smart Future - Programmatic Boundary Stress-Testing")
-    print("Standard Model: Google Gemini 2.5 Flash")
+    print(f"Model: {GEMINI_MODEL}")
     print("==================================================\033[0m\n")
 
     total_checks = 0
@@ -166,7 +179,7 @@ if __name__ == "__main__":
         print(f"User Input: '{test['input']}'")
 
         try:
-            output = evaluate_prompt(test["input"])
+            output = evaluate_with_retry(test["input"])
             print(f"\033[92mModel Response:\033[0m\n{output}")
             print("\033[94m[Verification Checks]:\033[0m")
 
