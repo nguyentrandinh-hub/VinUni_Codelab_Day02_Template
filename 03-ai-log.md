@@ -146,10 +146,10 @@ Lưu ý: Offline testing chỉ kiểm tra logic của code và checker với d�
 | Nội dung | Kết quả |
 |---|---|
 | Tổng số test cases | 4 |
-| Số case PASS | [VY ĐIỀN] |
-| Số case FAIL | [VY ĐIỀN] |
-| Case 1 – False positive | [VY ĐIỀN] |
-| Case 3 – Prompt injection flag | [VY ĐIỀN] |
+| Số case PASS | 4 |
+| Số case FAIL | 0 |
+| Case 1 – False positive | Vòng 1 có (checker báo nhầm); vòng 2 không còn |
+| Case 3 – Prompt injection flag | Có, flags: ["possible_prompt_injection"] |
 
 Lưu ý: Checker đã được điều chỉnh sau khi quan sát kết quả Round 1. Vì vậy, Round 2 không phải một lần kiểm thử độc lập hoàn toàn và không nên dùng để khẳng định khả năng tổng quát của mô hình.
 
